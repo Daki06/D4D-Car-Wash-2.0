@@ -1,0 +1,560 @@
+import React, { useState } from 'react';
+import { Car, Sparkles, Clock, MapPin, Phone, Mail, Star, CheckCircle, Menu, X, Droplets, Shield } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const services = [
+    {
+      name: "Platinum Detailing",
+      price: "R850",
+      description: "Complete exterior and interior detailing with paint correction",
+      icon: Sparkles
+    },
+    {
+      name: "Premium Ceramic Coating",
+      price: "From R3,500",
+      description: "Professional ceramic coating for long-lasting protection",
+      icon: Shield
+    },
+    {
+      name: "Interior Deep Clean",
+      price: "R550",
+      description: "Thorough interior cleaning with steam extraction and conditioning",
+      icon: Droplets
+    },
+    {
+      name: "Exterior Wash & Wax",
+      price: "R350",
+      description: "Hand wash with premium wax and tire shine",
+      icon: Sparkles
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Thabo Mokoena",
+      location: "Pretoria",
+      text: "The best car detailing I've experienced in South Africa. My BMW looks showroom fresh!",
+      rating: 5
+    },
+    {
+      name: "Nomsa Dlamini",
+      location: "Garankuwa",
+      text: "Professional service and attention to detail. Worth every rand for my Mercedes!",
+      rating: 5
+    },
+    {
+      name: "Pieter van der Merwe",
+      location: "Centurion",
+      text: "They transformed my vintage Ford. The ceramic coating is amazing!",
+      rating: 5
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-slate-900/90 backdrop-blur-sm z-50 border-b border-blue-500/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-2">
+              <Car className="h-8 w-8 text-blue-400" />
+              <span className="text-2xl font-bold text-white">D4D Car Wash</span>
+            </div>
+            
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-8">
+                <a href="#home" className="text-blue-400 hover:text-blue-300 transition-colors">Home</a>
+                <a href="#services" className="text-gray-300 hover:text-white transition-colors">Services</a>
+                <a href="#about" className="text-gray-300 hover:text-white transition-colors">About</a>
+                <a href="#contact" className="text-gray-300 hover:text-white transition-colors">Contact</a>
+              </div>
+            </div>
+
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-300 hover:text-white"
+              >
+                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-slate-800 border-t border-blue-500/20"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <a href="#home" className="block px-3 py-2 text-blue-400 hover:text-blue-300">Home</a>
+              <a href="#services" className="block px-3 py-2 text-gray-300 hover:text-white">Services</a>
+              <a href="#about" className="block px-3 py-2 text-gray-300 hover:text-white">About</a>
+              <a href="#contact" className="block px-3 py-2 text-gray-300 hover:text-white">Contact</a>
+            </div>
+          </motion.div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="pt-16 min-h-screen flex items-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent z-10"></div>
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            alt="Luxury Car"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
+          >
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+              Premium <span className="text-blue-400">D4D</span> Car Wash
+            </h1>
+            <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+              Garankuwa's most luxurious car detailing service. We transform your vehicle with meticulous care and premium products.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
+              >
+                Book Now
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-white text-white hover:bg-white hover:text-black font-bold py-4 px-8 rounded-lg text-lg transition-colors"
+              >
+                View Services
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Floating elements */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white text-center"
+          >
+            <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-20 bg-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-bold text-white mb-4"
+            >
+              Our <span className="text-blue-400">Premium</span> Services
+            </motion.h2>
+            <motion.p
+              variants={itemVariants}
+              className="text-xl text-gray-300 max-w-3xl mx-auto"
+            >
+              Experience the finest car care with our comprehensive range of detailing services in Garankuwa
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ y: -10 }}
+                className="bg-slate-700 rounded-xl p-8 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300"
+              >
+                <service.icon className="h-12 w-12 text-blue-400 mb-6" />
+                <h3 className="text-2xl font-bold text-white mb-3">{service.name}</h3>
+                <p className="text-3xl font-bold text-blue-400 mb-4">{service.price}</p>
+                <p className="text-gray-300 mb-6">{service.description}</p>
+                <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors">
+                  Select Service
+                </button>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-900/20 to-blue-800/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-12"
+          >
+            <motion.div
+              variants={itemVariants}
+              className="text-center"
+            >
+              <div className="bg-blue-500/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Sparkles className="h-10 w-10 text-blue-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">Premium Products</h3>
+              <p className="text-gray-300">
+                We use only the finest detailing products from leading international brands
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="text-center"
+            >
+              <div className="bg-blue-500/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Clock className="h-10 w-10 text-blue-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">Quick Service</h3>
+              <p className="text-gray-300">
+                Most services completed within 24 hours with our express options
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="text-center"
+            >
+              <div className="bg-blue-500/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="h-10 w-10 text-blue-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">Quality Guarantee</h3>
+              <p className="text-gray-300">
+                100% satisfaction guarantee on all our premium detailing services
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Why Choose <span className="text-blue-400">D4D Car Wash</span>?
+              </h2>
+              <p className="text-xl text-gray-300 mb-8">
+                Located in the heart of Garankuwa, we bring international standards of vehicle care to local enthusiasts.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-blue-400 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Expert Technicians</h3>
+                    <p className="text-gray-300">Our team is trained in the latest detailing techniques and uses premium products.</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-blue-400 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">State-of-the-Art Facility</h3>
+                    <p className="text-gray-300">Our modern facility is equipped with professional-grade equipment for the best results.</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-blue-400 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Local Pride</h3>
+                    <p className="text-gray-300">Proudly serving the Garankuwa community with exceptional service since day one.</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <div className="relative rounded-xl overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1925&q=80"
+                  alt="D4D Car Wash Facility"
+                  className="w-full h-96 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              </div>
+              <div className="absolute -bottom-6 -right-6 bg-blue-500 text-white p-6 rounded-lg shadow-2xl">
+                <p className="text-3xl font-bold">10+</p>
+                <p className="text-sm">Years Experience</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-bold text-white mb-4"
+            >
+              What Our <span className="text-blue-400">Clients</span> Say
+            </motion.h2>
+            <motion.p
+              variants={itemVariants}
+              className="text-xl text-gray-300 max-w-3xl mx-auto"
+            >
+              Join hundreds of satisfied customers in Garankuwa and beyond
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="bg-slate-700 rounded-xl p-8 border border-blue-500/20"
+              >
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-blue-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-300 mb-6 italic">"{testimonial.text}"</p>
+                <div>
+                  <p className="font-semibold text-white">{testimonial.name}</p>
+                  <p className="text-blue-400">{testimonial.location}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+          >
+            <motion.div variants={itemVariants}>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to <span className="text-blue-400">Transform</span> Your Vehicle?
+              </h2>
+              <p className="text-xl text-gray-300 mb-8">
+                Book your premium car wash experience at D4D Car Wash today and discover the difference luxury detailing makes.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="flex items-center">
+                  <MapPin className="h-6 w-6 text-blue-400 mr-4" />
+                  <div>
+                    <p className="text-white font-semibold">D4D Car Wash</p>
+                    <p className="text-gray-300">Garankuwa, Gauteng</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center">
+                  <Phone className="h-6 w-6 text-blue-400 mr-4" />
+                  <div>
+                    <p className="text-white font-semibold">+27 12 345 6789</p>
+                    <p className="text-gray-300">Mon-Sat: 8:00 AM - 6:00 PM</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center">
+                  <Mail className="h-6 w-6 text-blue-400 mr-4" />
+                  <div>
+                    <p className="text-white font-semibold">info@d4dcarwash.co.za</p>
+                    <p className="text-gray-300">24/7 Email Support</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="bg-slate-700 rounded-xl p-8 border border-blue-500/20"
+            >
+              <h3 className="text-2xl font-bold text-white mb-6">Book Your Service</h3>
+              <form className="space-y-6">
+                <div>
+                  <label className="block text-gray-300 mb-2">Full Name</label>
+                  <input
+                    type="text"
+                    className="w-full bg-slate-600 border border-slate-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-gray-300 mb-2">Email</label>
+                  <input
+                    type="email"
+                    className="w-full bg-slate-600 border border-slate-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-gray-300 mb-2">Phone</label>
+                  <input
+                    type="tel"
+                    className="w-full bg-slate-600 border border-slate-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-gray-300 mb-2">Service</label>
+                  <select className="w-full bg-slate-600 border border-slate-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400">
+                    <option>Select a service</option>
+                    <option>Platinum Detailing - R850</option>
+                    <option>Premium Ceramic Coating - From R3,500</option>
+                    <option>Interior Deep Clean - R550</option>
+                    <option>Exterior Wash & Wax - R350</option>
+                  </select>
+                </div>
+                
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-lg text-lg transition-colors"
+                >
+                  Book Appointment
+                </motion.button>
+              </form>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 border-t border-blue-500/20 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center space-x-2 mb-4">
+                <Car className="h-8 w-8 text-blue-400" />
+                <span className="text-2xl font-bold text-white">D4D Car Wash</span>
+              </div>
+              <p className="text-gray-400 mb-6 max-w-md">
+                Garankuwa's premier luxury car detailing service. We bring international standards of vehicle care to local enthusiasts.
+              </p>
+              <div className="flex space-x-4">
+                <div className="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center hover:bg-blue-500/20 cursor-pointer transition-colors">
+                  <span className="text-blue-400 font-bold">f</span>
+                </div>
+                <div className="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center hover:bg-blue-500/20 cursor-pointer transition-colors">
+                  <span className="text-blue-400 font-bold">in</span>
+                </div>
+                <div className="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center hover:bg-blue-500/20 cursor-pointer transition-colors">
+                  <span className="text-blue-400 font-bold">ig</span>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="text-white font-semibold mb-4">Services</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li className="hover:text-blue-400 cursor-pointer transition-colors">Platinum Detailing</li>
+                <li className="hover:text-blue-400 cursor-pointer transition-colors">Ceramic Coating</li>
+                <li className="hover:text-blue-400 cursor-pointer transition-colors">Interior Cleaning</li>
+                <li className="hover:text-blue-400 cursor-pointer transition-colors">Exterior Wash</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-white font-semibold mb-4">Company</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li className="hover:text-blue-400 cursor-pointer transition-colors">About Us</li>
+                <li className="hover:text-blue-400 cursor-pointer transition-colors">Location</li>
+                <li className="hover:text-blue-400 cursor-pointer transition-colors">Careers</li>
+                <li className="hover:text-blue-400 cursor-pointer transition-colors">Contact</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-slate-700 mt-12 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 D4D Car Wash. All rights reserved. | Premium Car Detailing Services in Garankuwa</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
